@@ -82,13 +82,13 @@ public class JwtService implements UserDetailsService
         } catch (JsonProcessingException e) {
             logger.error("Invalid JWT claim [ {} ]", JWT_ROLE_CLAIM_KEY);
             throw new FileManagerBaseException(String.format("Invalid JWT claim [ %s ]", JWT_ROLE_CLAIM_KEY),
-                    HttpStatus.FORBIDDEN.getReasonPhrase(), HttpStatus.FORBIDDEN.value());
+                    HttpStatus.FORBIDDEN.name(), HttpStatus.FORBIDDEN.value());
         }
 
         if (userRoles.isEmpty()){
             logger.error("User [ {} ] have 0 roles", getUserRoleFromJwtToken(token));
             throw new FileManagerBaseException(String.format("User [ %s ] have 0 roles", getUserRoleFromJwtToken(token)),
-                    HttpStatus.FORBIDDEN.getReasonPhrase(), HttpStatus.FORBIDDEN.value());
+                    HttpStatus.FORBIDDEN.name(), HttpStatus.FORBIDDEN.value());
         }
 
         return userRoles;

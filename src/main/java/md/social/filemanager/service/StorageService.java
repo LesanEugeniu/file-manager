@@ -7,9 +7,11 @@ import org.springframework.web.multipart.MultipartFile;
 
 public interface StorageService
 {
-    Page<FileDataDto> getUserFiles(String userName, Pageable pageable);
+    Page<FileDataDto> getFiles(String userName, Pageable pageable);
 
-    Long saveFile(String userName, MultipartFile file);
+    FileDataDto getFileById(String userName, Long id);
+
+    FileDataDto saveFile(String userName, MultipartFile file);
 
     void deleteFile(String userName, Long fileId);
 }
