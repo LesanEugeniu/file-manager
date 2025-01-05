@@ -28,7 +28,7 @@ import java.util.List;
 @Service
 public class JwtService implements UserDetailsService
 {
-    private static final Logger logger = LoggerFactory.getLogger(JwtService.class);
+    private final Logger logger = LoggerFactory.getLogger(JwtService.class);
 
     private final String JWT_ROLE_CLAIM_KEY = "roles";
 
