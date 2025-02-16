@@ -14,4 +14,6 @@ public interface StorageService
     FileDataDto saveFile(String userName, MultipartFile file);
 
     void deleteFile(String userName, Long fileId);
+
+    byte[] downloadFile(String userName, Long fileId);
 }

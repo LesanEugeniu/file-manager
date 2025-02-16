@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -33,11 +35,39 @@ public class StorageController
         return ResponseEntity.ok(storageService.getFiles(principal.getName(), pageable));
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<FileDataDto> getFile(
+            @PathVariable Long id,
+            Principal principal)
+    {
+        return ResponseEntity.ok(storageService.getFileById(principal.getName(), id));
+    }
+
     @PostMapping
     public ResponseEntity<FileDataDto> saveFile(
             @RequestParam("file") MultipartFile file,
             Principal principal)
     {
         return ResponseEntity.ok(storageService.saveFile(principal.getName(), file));
+    }
+
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deleteFile(
+            @PathVariable Long id,
+            Principal principal)
+    {
+        storageService.deleteFile(principal.getName(), id);
+        return ResponseEntity.ok().build();
+    }
+
+    @GetMapping("/download/{id}")
+    public ResponseEntity<?> downloadFile(
+            @PathVariable Long id,
+            Principal principal)
+    {
+        return ResponseEntity.status(HttpStatus.OK)
+                .contentType(MediaType.APPLICATION_OCTET_STREAM)
+                .body(storageService.downloadFile(principal.getName(), id));
     }
 }

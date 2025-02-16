@@ -44,4 +44,15 @@ public class FileDataDto
     public void setFilePath(String filePath) {
         this.filePath = filePath;
     }
+
+    @Override
+    public String toString() {
+        final StringBuffer sb = new StringBuffer("FileDataDto{");
+        sb.append("id=").append(id);
+        sb.append(", createdAt=").append(createdAt);
+        sb.append(", type='").append(type).append('\'');
+        sb.append(", filePath='").append(filePath).append('\'');
+        sb.append('}');
+        return sb.toString();
+    }
 }
